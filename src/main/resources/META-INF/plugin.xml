@@ -1,15 +1,24 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.no3x.intellijkotlinbracketconverter</id>
-    <name>intellij-kotlin-bracket-converter</name>
+    <id>com.github.no3x.bracketconverter</id>
+    <name>kotlin-bracket-converter</name>
     <vendor>no3x</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.no3x.intellijkotlinbracketconverter.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.no3x.intellijkotlinbracketconverter.startup.MyProjectActivity" />
+        <toolWindow factoryClass="com.github.no3x.intellij.bracketconverter.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <postStartupActivity implementation="com.github.no3x.intellij.bracketconverter.startup.MyProjectActivity" />
+        <intentionAction>
+            <language>kotlin</language>
+            <className>com.github.no3x.intellij.bracketconverter.action.ConvertBracesToParensIntention</className>
+            <category>Kotlin</category>
+        </intentionAction>
+    </extensions>
+    <extensions defaultExtensionNs="org.jetbrains.kotlin">
+        <supportsKotlinPluginMode supportsK1="true" supportsK2="true"/>
     </extensions>
 </idea-plugin>

@@ -1,0 +1,47 @@
+<html lang="en">
+<body>
+
+<p>
+    Provides an intention that converts Kotlin lambda braces into parentheses and vice versa to simplify editing and refactoring of inline lambda expressions.
+</p>
+
+<p>
+    This intention allows you to quickly switch between <code>{ }</code> and <code>( )</code> when working with Kotlin lambdas.
+    It detects the bracket under or near the caret—including when the caret is placed immediately before or after the bracket—and applies a consistent transformation.
+    Both directions are supported:
+</p>
+
+<ul>
+    <li><code>{ ... }</code> → <code>( ... )</code></li>
+    <li><code>( ... )</code> → <code>{ ... }</code></li>
+</ul>
+
+<p>
+    This is especially useful when adjusting lambda syntax, converting between trailing-lambda style and explicit-argument style, or manipulating DSL-like lambda blocks.
+</p>
+
+<p>Example:</p>
+
+<pre><code>
+// Before:
+listOf(1, 2).filter { it % 2 == 0 }
+
+// After applying the intention:
+listOf(1, 2).filter ( it % 2 == 0 )
+
+// And the reverse direction also works.
+</code></pre>
+
+<!-- tooltip end -->
+
+<p>
+    Text below this line appears only in the intention settings inside the IDE.
+</p>
+
+<p>
+    You can adjust intention visibility or enable/disable intentions through
+    <a href="settings://editor.intentions">Settings → Editor → Intentions</a>.
+</p>
+
+</body>
+</html>

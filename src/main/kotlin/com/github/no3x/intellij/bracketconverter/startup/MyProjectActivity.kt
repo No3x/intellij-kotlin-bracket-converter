@@ -1,4 +1,4 @@
-package com.github.no3x.intellijkotlinbracketconverter.startup
+package com.github.no3x.intellij.bracketconverter.startup
 
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project

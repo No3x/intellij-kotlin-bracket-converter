@@ -1,9 +1,9 @@
-package com.github.no3x.intellijkotlinbracketconverter.services
+package com.github.no3x.intellij.bracketconverter.services
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.thisLogger
 import com.intellij.openapi.project.Project
-import com.github.no3x.intellijkotlinbracketconverter.MyBundle
+import com.github.no3x.intellij.bracketconverter.MyBundle
 
 @Service(Service.Level.PROJECT)
 class MyProjectService(project: Project) {

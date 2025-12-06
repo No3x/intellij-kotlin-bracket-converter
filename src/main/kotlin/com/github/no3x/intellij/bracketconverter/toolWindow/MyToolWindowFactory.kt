@@ -1,4 +1,4 @@
-package com.github.no3x.intellijkotlinbracketconverter.toolWindow
+package com.github.no3x.intellij.bracketconverter.toolWindow
 
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.thisLogger
@@ -8,8 +8,8 @@ import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.ui.components.JBLabel
 import com.intellij.ui.components.JBPanel
 import com.intellij.ui.content.ContentFactory
-import com.github.no3x.intellijkotlinbracketconverter.MyBundle
-import com.github.no3x.intellijkotlinbracketconverter.services.MyProjectService
+import com.github.no3x.intellij.bracketconverter.MyBundle
+import com.github.no3x.intellij.bracketconverter.services.MyProjectService
 import javax.swing.JButton
 
 

@@ -1,4 +1,4 @@
-package com.github.no3x.intellijkotlinbracketconverter
+package com.github.no3x.intellij.bracketconverter
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls
