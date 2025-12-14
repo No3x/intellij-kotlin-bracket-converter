@@ -1,49 +1,45 @@
-# intellij-kotlin-bracket-converter
+# Kotlin Bracket Converter
+intellij-kotlin-bracket-converter
 
 ![Build](https://github.com/No3x/intellij-kotlin-bracket-converter/workflows/Build/badge.svg)
 [![Version](https://img.shields.io/jetbrains/plugin/v/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/MARKETPLACE_ID.svg)](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID)
 
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Adjust the [pluginGroup](./gradle.properties) and [pluginName](./gradle.properties), as well as the [id](./src/main/resources/META-INF/plugin.xml) and [sources package](./src/main/kotlin).
-- [ ] Adjust the plugin description in `README` (see [Tips][docs:plugin-description])
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the `MARKETPLACE_ID` in the above README badges. You can obtain it once the plugin is published to JetBrains Marketplace.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
-- [ ] Configure the [CODECOV_TOKEN](https://docs.codecov.com/docs/quick-start) secret for automated test coverage reports on PRs
+Light-weight IntelliJ IDEA/Android Studio plugin that lets you flip Kotlin brackets in place. It adds a single intention action that can turn a lambda written with braces into parentheses (and back again) right where your caret sits.
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+Kotlin Bracket Converter adds an intention action for quickly swapping Kotlin braces and parentheses at the caret.
+- Put the caret on the opening `{` of a lambda literal to turn the braces into `(` `)` in place.
+- Put the caret on an opening `(` to turn that pair into `{` `}`.
 
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
-
-To keep everything working, do not remove `<!-- ... -->` sections. 
+Use it to prototype DSL-style call sites, experiment with code style, or simply fix the occasional misplaced bracket without re-typing the line. The action is intentionally simple: it only swaps the two characters; review the result and reformat if needed.
 <!-- Plugin description end -->
 
+### Example
+Before:
+```kotlin
+listOf(1, 2).map { it * 2 }
+```
+After running **Convert { } to ( )** with the caret on the `{`:
+```kotlin
+listOf(1, 2).map ( it * 2 )
+```
+You can invoke the opposite intention on the `(` to revert back to braces.
+
+## How to use
+- Open a Kotlin file and place the caret on the opening `{` of a lambda expression or on an opening `(` you want to swap.
+- Press `Alt+Enter` (or your intention shortcut) and choose **Convert { } to ( )** or **Convert ( ) to { }**.
+- The plugin replaces the matching pair directly in the editor; run code formatting if spacing looks off.
+
+## Why it saves time
+- Swaps both ends of the bracket pair in one action—no hunting for the matching bracket or retyping.
+- Keeps you in flow: `Alt+Enter` beats multiple cursor moves, edits, and reformat steps.
+- Great for quick style experiments (DSLs, lambdas) and for undoing a bracket style you no longer want.
+
 ## Installation
-
-- Using the IDE built-in plugin system:
-
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "kotlin-bracket-converter"</kbd> >
-  <kbd>Install</kbd>
-
-- Using JetBrains Marketplace:
-
-  Go to [JetBrains Marketplace](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID) and install it by clicking the <kbd>Install to ...</kbd> button in case your IDE is running.
-
-  You can also download the [latest release](https://plugins.jetbrains.com/plugin/MARKETPLACE_ID/versions) from JetBrains Marketplace and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
-- Manually:
-
-  Download the [latest release](https://github.com/No3x/intellij-kotlin-bracket-converter/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
-
+- ~~IDE Marketplace: `Settings/Preferences` > `Plugins` > `Marketplace` > search for "kotlin-bracket-converter" > Install.~~
+- ~~JetBrains Marketplace page: https://plugins.jetbrains.com/plugin/MARKETPLACE_ID (replace `MARKETPLACE_ID` once published).~~
+- Manual: Download the latest release from GitHub ~~or Marketplace~~ and choose `Install plugin from disk...`.
 
 ---
 Plugin based on the [IntelliJ Platform Plugin Template][template].
