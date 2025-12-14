@@ -10,8 +10,6 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.no3x.intellij.bracketconverter.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.no3x.intellij.bracketconverter.startup.MyProjectActivity" />
         <intentionAction>
             <language>kotlin</language>
             <className>com.github.no3x.intellij.bracketconverter.action.ConvertBracesToParensIntention</className>
