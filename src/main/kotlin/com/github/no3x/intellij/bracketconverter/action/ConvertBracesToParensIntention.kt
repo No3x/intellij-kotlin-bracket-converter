@@ -100,25 +100,25 @@ class ConvertBracesToParensIntention : PsiElementBaseIntentionAction() {
 
     private fun convertParenToCurly(project: Project, editor: Editor, leaf: PsiElement) {
         val lParen = leaf
-        val doc = editor.document
-        val text = doc.charsSequence
 
-        // Find the matching right paren for this left paren, skipping nested parens.
-        var depth = 0
-        var rOffset = -1
-        for (i in lParen.textRange.endOffset until text.length) {
-            when (text[i]) {
-                '(' -> depth++
-                ')' -> if (depth == 0) {
-                    rOffset = i
-                    break
-                } else {
-                    depth--
-                }
-            }
-        }
-        if (rOffset == -1) return
-        doc.replaceString(rOffset, rOffset + 1, "}")
+        val rParen = findMatchingRParen(lParen) ?: return
+
+        val doc = editor.document
+        doc.replaceString(rParen.textRange.startOffset, rParen.textRange.endOffset, "}")
         doc.replaceString(lParen.textRange.startOffset, lParen.textRange.endOffset, "{")
+    }
+
+    private fun findMatchingRParen(lParen: PsiElement): PsiElement? {
+        var depth = 0
+        var current = PsiTreeUtil.nextLeaf(lParen)
+        while (current != null) {
+            val type = current.node.elementType
+            when (type) {
+                KtTokens.LPAR -> depth++
+                KtTokens.RPAR -> if (depth == 0) return current else depth--
+            }
+            current = PsiTreeUtil.nextLeaf(current)
+        }
+        return null
     }
 }
