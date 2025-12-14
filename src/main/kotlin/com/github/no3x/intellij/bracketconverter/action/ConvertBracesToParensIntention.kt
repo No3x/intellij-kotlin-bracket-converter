@@ -1,5 +1,6 @@
 package com.github.no3x.intellij.bracketconverter.action
 
+import com.github.no3x.intellij.bracketconverter.MyBundle
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
@@ -14,12 +15,12 @@ class ConvertBracesToParensIntention : PsiElementBaseIntentionAction() {
     private enum class Mode { CURLY_TO_PAREN, PAREN_TO_CURLY, NONE }
     private var mode: Mode = Mode.NONE
 
-    override fun getFamilyName(): String = "Kotlin Bracket Conversion"
+    override fun getFamilyName(): String = MyBundle.message("intentionaction.convertBracesToParentheses.familyName")
 
     override fun getText(): String = when (mode) {
-        Mode.CURLY_TO_PAREN -> "Convert { } to ( )"
-        Mode.PAREN_TO_CURLY -> "Convert ( ) to { }"
-        Mode.NONE -> "Convert brackets"
+        Mode.CURLY_TO_PAREN -> MyBundle.message("intentionaction.convertBracesToParentheses.brackets2parentheses")
+        Mode.PAREN_TO_CURLY -> MyBundle.message("intentionaction.convertBracesToParentheses.parentheses2brackets")
+        Mode.NONE -> ""
     }
 
     override fun isAvailable(project: Project, editor: Editor?, element: PsiElement): Boolean {
