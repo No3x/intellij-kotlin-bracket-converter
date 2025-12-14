@@ -2,6 +2,7 @@ package com.github.no3x.intellij.bracketconverter.action
 
 import com.github.no3x.intellij.bracketconverter.MyBundle
 import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction
+import com.intellij.codeInsight.intention.preview.IntentionPreviewUtils
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 import com.intellij.psi.PsiElement
@@ -13,6 +14,7 @@ import org.jetbrains.kotlin.psi.KtFunctionLiteral
 class ConvertBracesToParensIntention : PsiElementBaseIntentionAction() {
 
     private enum class Mode { CURLY_TO_PAREN, PAREN_TO_CURLY, NONE }
+
     private var mode: Mode = Mode.NONE
 
     override fun getFamilyName(): String = MyBundle.message("intentionaction.convertBracesToParentheses.familyName")
@@ -45,7 +47,6 @@ class ConvertBracesToParensIntention : PsiElementBaseIntentionAction() {
         }
     }
 
-    override fun startInWriteAction(): Boolean = true
 
     // ---------------- detection ----------------
 
@@ -93,20 +94,23 @@ class ConvertBracesToParensIntention : PsiElementBaseIntentionAction() {
         val rBrace = functionLiteral.rBrace ?: return
 
         val doc = editor.document
-        doc.replaceString(rBrace.textRange.startOffset, rBrace.textRange.endOffset, ")")
-        doc.replaceString(lBrace.textRange.startOffset, lBrace.textRange.endOffset, "(")
+        IntentionPreviewUtils.write<RuntimeException> {
+            doc.replaceString(rBrace.textRange.startOffset, rBrace.textRange.endOffset, ")")
+            doc.replaceString(lBrace.textRange.startOffset, lBrace.textRange.endOffset, "(")
+        }
     }
 
     // ---------------- ( ) → { } (unchanged, still naive) ----------------
 
     private fun convertParenToCurly(project: Project, editor: Editor, leaf: PsiElement) {
         val lParen = leaf
-
         val rParen = findMatchingRParen(lParen) ?: return
 
         val doc = editor.document
-        doc.replaceString(rParen.textRange.startOffset, rParen.textRange.endOffset, "}")
-        doc.replaceString(lParen.textRange.startOffset, lParen.textRange.endOffset, "{")
+        IntentionPreviewUtils.write<RuntimeException> {
+            doc.replaceString(rParen.textRange.startOffset, rParen.textRange.endOffset, "}")
+            doc.replaceString(lParen.textRange.startOffset, lParen.textRange.endOffset, "{")
+        }
     }
 
     private fun findMatchingRParen(lParen: PsiElement): PsiElement? {
